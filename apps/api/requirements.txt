@@ -1,0 +1,23 @@
+fastapi
+httpx
+numpy
+openai
+pandas
+# SSO deel 2 draait op PuLP; codevragen worden uitgevoerd om de sleutel te
+# krijgen. Zonder pulp vallen alleen die kaarten weg.
+pulp
+pydantic-settings
+pypdf
+pytest
+python-multipart
+python-pptx
+PyYAML
+qdrant-client
+rank_bm25
+scipy
+# Alleen om de figuren bij de uitgewerkte voorbeelden te tekenen; zonder
+# matplotlib werkt de rest gewoon door, er komen dan geen figuren.
+matplotlib
+sqlalchemy
+tzdata
+uvicorn[standard]

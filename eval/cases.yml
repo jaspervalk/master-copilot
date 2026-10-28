@@ -1,0 +1,231 @@
+# De evalset. Verwachtingen wijzen naar source_path + paginabereik uit de
+# bladwijzers van het boek (de inhoudsopgave van de uitgever), nooit naar wat
+# retrieval toevallig teruggaf. Zie eval/README.md.
+#
+# SSO heeft twee edities van hetzelfde boek: ISLR (R) en ISLP (Python). De
+# paginering verschilt per hoofdstuk een paar bladzijden, dus elke case noemt
+# beide, elk met het bereik uit zijn eigen bladwijzers. Een treffer in één van
+# beide telt.
+cases:
+  # ---- SSO: An Introduction to Statistical Learning (ISLR 2e / ISLP) ----
+  - id: islr-bias-variance
+    course_slug: sso
+    question: wat is de bias-variance tradeoff?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [44, 46]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [41, 43]
+
+  - id: islr-kfold
+    course_slug: sso
+    question: hoe werkt k-fold cross-validation?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [214, 216]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [214, 216]
+
+  - id: islr-kfold-bias-variance
+    course_slug: sso
+    question: waarom kiest men vaak k=5 of k=10 bij cross-validation?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [216, 216]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [216, 216]
+
+  - id: islr-bootstrap
+    course_slug: sso
+    question: wat is de bootstrap en waarvoor gebruik je hem?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [219, 222]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [220, 222]
+
+  - id: islr-ridge
+    course_slug: sso
+    question: hoe werkt ridge regression en wat doet de tuning parameter lambda?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [248, 251]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [248, 251]
+
+  - id: islr-lasso
+    course_slug: sso
+    question: waarom zet de lasso coëfficiënten exact op nul?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [252, 260]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [252, 259]
+
+  - id: islr-ridge-vs-lasso
+    course_slug: sso
+    question: wat is het verschil tussen ridge en lasso?
+    must_mention: [lasso, ridge]
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [248, 260]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [248, 259]
+
+  - id: islr-logistic
+    course_slug: sso
+    question: hoe modelleert logistische regressie een kans?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [144, 151]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [147, 154]
+
+  - id: islr-knn-vs-linear
+    course_slug: sso
+    question: wanneer presteert k-nearest neighbors slechter dan lineaire regressie?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [116, 120]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [120, 124]
+
+  - id: islr-bagging
+    course_slug: sso
+    question: hoe vermindert bagging de variantie van een beslisboom?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [351, 353]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [350, 352]
+
+  - id: islr-random-forest
+    course_slug: sso
+    question: wat doet een random forest anders dan bagging?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [354, 355]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [353, 353]
+
+  - id: islr-boosting
+    course_slug: sso
+    question: hoe werkt boosting bij beslisbomen?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [356, 358]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [354, 356]
+
+  - id: islr-svc
+    course_slug: sso
+    question: wat is een support vector classifier en wat is de rol van de parameter C?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [384, 388]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [380, 383]
+
+  - id: islr-pca
+    course_slug: sso
+    question: wat zijn principal components en hoe interpreteer je de loadings?
+    expected:
+      - source_path: sso/books/ISLRv2_corrected_June_2023.pdf
+        pages: [507, 518]
+      - source_path: sso/books/ISLP_website.pdf
+        pages: [510, 520]
+
+  - id: islr-abstain-kubernetes
+    course_slug: sso
+    question: hoe configureer ik een kubernetes ingress controller?
+    expect_abstain: true
+
+  # ---- Fundamentals of DS: Python Data Science Handbook ----
+  - id: pdsh-broadcasting
+    course_slug: fundamentals-of-ds
+    question: hoe werkt broadcasting in numpy?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [81, 87]
+
+  - id: pdsh-broadcasting-rules
+    course_slug: fundamentals-of-ds
+    question: wat zijn de drie regels van broadcasting?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [83, 85]
+
+  - id: pdsh-fancy-indexing
+    course_slug: fundamentals-of-ds
+    question: wat is fancy indexing in numpy?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [96, 102]
+
+  - id: pdsh-sorting
+    course_slug: fundamentals-of-ds
+    question: hoe sorteer ik een numpy array en wat doet argsort?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [103, 109]
+
+  - id: pdsh-missing-data
+    course_slug: fundamentals-of-ds
+    question: hoe gaat pandas om met ontbrekende waarden?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [137, 145]
+
+  - id: pdsh-hierarchical-index
+    course_slug: fundamentals-of-ds
+    question: wat is een MultiIndex in pandas?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [146, 158]
+
+  - id: pdsh-merge
+    course_slug: fundamentals-of-ds
+    question: hoe combineer ik twee dataframes met merge?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [164, 175]
+
+  - id: pdsh-groupby
+    course_slug: fundamentals-of-ds
+    question: hoe groepeer ik data met groupby in pandas?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [176, 187]
+
+  - id: pdsh-pivot
+    course_slug: fundamentals-of-ds
+    question: wat is een pivot table en hoe verschilt die van groupby?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [188, 195]
+
+  - id: pdsh-string-ops
+    course_slug: fundamentals-of-ds
+    question: hoe pas ik string-operaties toe op een hele kolom in pandas?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [196, 205]
+
+  - id: pdsh-pca
+    course_slug: fundamentals-of-ds
+    question: hoe voer ik PCA uit met scikit-learn?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [451, 463]
+
+  - id: pdsh-kmeans
+    course_slug: fundamentals-of-ds
+    question: hoe werkt het k-means algoritme?
+    expected:
+      - source_path: fundamentals-of-ds/books/Python-Data-Science-Handbook.pdf
+        pages: [480, 493]
+
+  - id: pdsh-abstain-recipe
+    course_slug: fundamentals-of-ds
+    question: wat is een goed recept voor zuurdesembrood?
+    expect_abstain: true

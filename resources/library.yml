@@ -1,0 +1,173 @@
+# Externe uitleg, gekoppeld aan de onderwerpen uit je course.yml.
+#
+# Alles hier wordt alléén gelinkt, nooit binnengehaald: het corpus blijft je
+# eigen materiaal. Per bron staat de licentie erbij, zodat je ziet wat je er
+# wel en niet mee mag. Een bron verschijnt bij een onderwerp als een van zijn
+# `topics` als heel woord in dat onderwerp voorkomt — geen gok, en een
+# onderwerp zonder match blijft gewoon leeg.
+#
+# Toevoegen: zet hem in de goede lijst, geef `topics` de woorden zoals ze in
+# course.yml staan, en noem de licentie eerlijk (ook als die "alleen kijken" is).
+
+resources:
+  - name: StatQuest — Josh Starmer
+    url: https://statquest.org/video-index/
+    kind: video
+    license: Standaard YouTube-licentie — alleen kijken, niet overnemen
+    note: Korte uitleg per begrip, met de afleiding erbij getekend.
+    topics:
+      - regression
+      - logistic
+      - linear
+      - glm
+      - generalized
+      - polynomial
+      - gam
+      - additive
+      - chi
+      - t-test
+      - testing
+      - anova
+      - ancova
+      - probability
+      - distribution
+      - nonparametric
+
+  - name: Seeing Theory — Brown University
+    url: https://seeing-theory.brown.edu/
+    kind: interactief
+    license: Educatief, niet-commercieel; wordt niet meer onderhouden
+    note: Je schuift zelf aan de parameters; vooral sterk voor steekproevenverdelingen.
+    topics:
+      - probability
+      - distribution
+      - sample
+      - sampling
+      - estimating
+      - testing
+      - regression
+      - descriptive
+
+  - name: OpenIntro Statistics
+    url: https://www.openintro.org/book/os/
+    kind: boek
+    license: CC BY-SA 3.0 — mag je hergebruiken mits naamsvermelding en dezelfde licentie
+    note: Volledig tekstboek met opgaven; de enige bron hier die je ook zou mógen indexeren.
+    topics:
+      - descriptive
+      - probability
+      - distribution
+      - sample
+      - estimating
+      - testing
+      - proportion
+      - mean
+      - chi
+      - contingency
+      - regression
+      - inference
+
+  - name: An Introduction to Statistical Learning — statlearning.com
+    url: https://www.statlearning.com/
+    kind: boek en video
+    license: Gratis pdf en gratis colleges; copyright Springer — alleen linken
+    note: Het boek van dit vak, met de colleges van de auteurs erbij.
+    topics:
+      - linear
+      - regression
+      - classification
+      - logistic
+      - moving beyond linearity
+      - polynomial
+      - gam
+      - additive
+      - generalized
+      - model selection
+      - multiple testing
+
+  - name: PennState STAT online notes
+    url: https://online.stat.psu.edu/statprogram/
+    kind: collegeaantekeningen
+    license: Vrij toegankelijk, Penn State
+    note: Uitgeschreven stappenplannen per toets; handig als een slide te kort is.
+    topics:
+      - testing
+      - regression
+      - anova
+      - ancova
+      - chi
+      - contingency
+      - nonparametric
+      - sign test
+      - rank
+      - proportion
+      - f-test
+
+# De onderbouwing van de manier van oefenen zelf. Deze verschijnen niet bij een
+# onderwerp maar op de bronnenpagina, bij de uitleg van het programma.
+method:
+  - claim: Jezelf overhoren werkt beter dan overlezen, en spreiden beter dan stampen.
+    source: Dunlosky, Rawson, Marsh, Nathan & Willingham (2013)
+    title: "Improving Students' Learning With Effective Learning Techniques"
+    url: https://journals.sagepub.com/doi/abs/10.1177/1529100612453266
+    strength: Overzichtsstudie; deze twee komen als enige als "hoog nut" uit tien technieken.
+
+  - claim: Overhoren levert meer op dan herlezen, en het verschil groeit met de tijd.
+    source: Rowland (2014)
+    title: "The effect of testing versus restudy on retention — a meta-analysis"
+    url: https://pubmed.ncbi.nlm.nih.gov/25150680/
+    strength: Meta-analyse over 159 effectgroottes, g = 0.50; zelf produceren werkt beter dan herkennen.
+
+  - claim: In echte klassen doet quizzen hetzelfde als in het lab.
+    source: Yang, Luo, Vadillo, Yu & Shanks (2021)
+    title: "Testing (quizzing) boosts classroom learning"
+    url: https://pubmed.ncbi.nlm.nih.gov/33683913/
+    strength: 222 studies, 48.478 studenten, g = 0.50.
+
+  - claim: De beste tussenpoos hangt af van hoe lang je het moet onthouden — ongeveer een tiende tot een vijfde daarvan.
+    source: Cepeda, Vul, Rohrer, Wixted & Pashler (2008)
+    title: "Spacing effects in learning — a temporal ridgeline of optimal retention"
+    url: https://journals.sagepub.com/doi/10.1111/j.1467-9280.2008.02209.x
+    strength: Experimenteel, ~1350 deelnemers; hierop is de herhaalafstand in deze copilot gebaseerd.
+
+  - claim: Door elkaar oefenen werkt beter dan per onderwerp — juist bij het kiezen van de juiste aanpak.
+    source: Rohrer, Dedrick, Hartwig & Cheung (2020)
+    title: "A randomized controlled trial of interleaved mathematics practice"
+    url: https://psycnet.apa.org/record/2019-26066-001
+    strength: Gerandomiseerd, 787 leerlingen, 54 klassen; onaangekondigde toets een maand later 61% tegen 38% (d = 0.83).
+
+  - claim: Maar niet overal even sterk — bij wiskundige stof lopen de uitkomsten uiteen.
+    source: Brunmair & Richter (2019)
+    title: "Similarity matters — a meta-analysis of interleaved learning and its moderators"
+    url: https://pubmed.ncbi.nlm.nih.gov/31556629/
+    strength: Meta-analyse, 59 studies; gemiddeld g = 0.42, maar klein en wisselend voor wiskunde.
+
+  - claim: Tijdens het oefenen voelt door elkaar juist slechter. Dat is het punt, en de reden dat mensen ermee stoppen.
+    source: Taylor & Rohrer (2010)
+    title: "The effects of interleaved practice"
+    url: http://uweb.cas.usf.edu/~drohrer/pdfs/Taylor&Rohrer2010ACP.pdf
+    strength: Oefenscore ging omlaag, toetsscore de dag erna van 38% naar 77%.
+
+  - claim: Studenten schatten hun eigen kennis stelselmatig verkeerd in; herlezen voelt alsof het werkt.
+    source: Karpicke, Butler & Roediger (2009)
+    title: "Metacognitive strategies in student learning"
+    url: https://learninglab.psych.purdue.edu/downloads/2009/2009_Karpicke_Butler_Roediger.pdf
+    strength: 177 studenten; 84% noemt herlezen, 11% noemt zichzelf overhoren.
+
+  - claim: Uitgewerkte voorbeelden helpen wie iets nieuw leert — en remmen wie het al kan.
+    source: Kalyuga, Ayres, Chandler & Sweller (2003)
+    title: "The expertise reversal effect"
+    url: https://mrbartonmaths.com/resourcesnew/8.%20Research/Explicit%20Instruction/The%20Expertise%20Reversal%20Effect.pdf
+    strength: Daarom komt de uitwerking hier ná je poging, en niet ervoor.
+
+  - claim: Overhoren van feiten levert niet vanzelf het kunnen toepassen op.
+    source: Pan & Rickard (2018)
+    title: "Transfer of test-enhanced learning — meta-analytic review"
+    url: https://pubmed.ncbi.nlm.nih.gov/29733621/
+    strength: 192 effectgroottes; overdracht naar andere vragen is positief maar kleiner (d = 0.40). Daarom draait het hier om keuzevragen en uitrekenen, niet om definities.
+
+  - claim: Leerstijlen bestaan niet als onderwijsmethode. Er zit dus bewust geen "visuele modus" in.
+    source: Pashler, McDaniel, Rohrer & Bjork (2008)
+    title: "Learning styles — concepts and evidence"
+    url: https://journals.sagepub.com/doi/full/10.1111/j.1539-6053.2009.01038.x
+    strength: Overzichtsstudie in opdracht; geen enkele deugdelijke studie vindt het verwachte effect.

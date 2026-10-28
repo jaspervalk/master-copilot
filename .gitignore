@@ -1,0 +1,27 @@
+# Studiemateriaal hoort niet in een publiek repo. De schuine streep voorop is
+# nodig: zonder die streep zou dit ook apps/web/app/corpus/ uitsluiten.
+/corpus/*
+!/corpus/README.md
+
+/data/
+.venv/
+node_modules/
+.next/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.tsbuildinfo
+.playwright-mcp/
+
+# Persoonlijk, per gebruiker van de repo: los onderzoek.
+/docs/research/
+
+# Werknotities en instellingen van Claude Code blijven lokaal, ook in submappen.
+CLAUDE.md
+CLAUDE.local.md
+.claude/
+/docs/superpowers/
