@@ -28,6 +28,13 @@ def _no_openai(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(settings, "openai_api_key", None)
 
 
+@pytest.fixture(autouse=True)
+def _no_ntfy(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Met een topic in de echte .env gaat een test die `cli notify` aanroept
+    anders echt naar je telefoon."""
+    monkeypatch.setattr(settings, "ntfy_topic", None)
+
+
 @pytest.fixture()
 def tmp_corpus(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Path]:
     """Wijs settings.corpus_dir naar een lege wegwerpmap."""

@@ -11,6 +11,7 @@ tests geven een stub mee en raken geen netwerk.
 from __future__ import annotations
 
 import html
+import http.client
 import json
 import os
 import re
@@ -114,6 +115,8 @@ class CanvasClient:
             raise CanvasError(exc.code, path) from None
         except urllib.error.URLError as exc:
             raise CanvasError(None, path, str(exc.reason)) from None
+        except (OSError, http.client.HTTPException) as exc:
+            raise CanvasError(None, path, str(exc) or type(exc).__name__) from None
         return b"".join(chunks)
 
     def _request(self, url: str, path: str) -> tuple[Any, str]:
@@ -127,7 +130,14 @@ class CanvasClient:
             raise CanvasError(exc.code, path) from None
         except urllib.error.URLError as exc:
             raise CanvasError(None, path, str(exc.reason)) from None
-        return json.loads(body), link
+        except (OSError, http.client.HTTPException) as exc:
+            # Een time-out of verbroken verbinding tijdens het lezen is geen URLError.
+            raise CanvasError(None, path, str(exc) or type(exc).__name__) from None
+        try:
+            return json.loads(body), link
+        except ValueError:
+            # Een inlogpagina of proxy antwoordt 200 met html.
+            raise CanvasError(None, path, "het antwoord was geen JSON") from None
 
 
 def client_from_settings() -> CanvasClient | None:

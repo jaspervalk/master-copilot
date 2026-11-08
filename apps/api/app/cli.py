@@ -273,8 +273,9 @@ def _run_canvas_sync(args: argparse.Namespace) -> int:
 
 
 def _run_notify(args: argparse.Namespace) -> int:
-    from app.services.canvas.agenda import build_agenda
-    from app.services.canvas.notify import due_soon, message, send
+    from app.models import utcnow
+    from app.services.canvas.agenda import build_agenda, local_date
+    from app.services.canvas.notify import NotifyError, due_soon, message, send
 
     if not settings.ntfy_topic and not args.dry_run:
         print("ntfy is niet geconfigureerd: zet NTFY_TOPIC in .env")
@@ -290,16 +291,21 @@ def _run_notify(args: argparse.Namespace) -> int:
                 sync_canvas(db, client)
             except CanvasError as exc:
                 print(f"Canvas-fout, oude gegevens gebruikt: {exc}")
-        items = due_soon(build_agenda(db).items, args.days)
+        agenda = build_agenda(db)
+        due = due_soon(agenda.items, agenda.tasks, args.days, today=local_date(utcnow()))
     finally:
         db.close()
 
-    if not items:
+    if not due:
         print("Niets binnen", args.days, "dagen")
         return 0
-    print(message(items))
+    print(message(due))
     if not args.dry_run:
-        send(settings.ntfy_server, settings.ntfy_topic, items)
+        try:
+            send(settings.ntfy_server, settings.ntfy_topic, due)
+        except NotifyError as exc:
+            print(f"Melding niet verstuurd: {exc}")
+            return 1
     return 0
 
 

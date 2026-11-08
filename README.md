@@ -152,9 +152,12 @@ kan als tekst het corpus in, zodat de coach de opgave kent. Canvas past
 ### Deadlines op je telefoon
 
 `notify` haalt Canvas op en stuurt één bericht met wat er de komende drie
-dagen af moet, via [ntfy](https://ntfy.sh) (gratis app, geen account).
-Installeer de app, abonneer op een lange willekeurige topicnaam en zet die als
-`NTFY_TOPIC` in `.env`: wie de naam kent, leest mee.
+dagen af moet, via [ntfy](https://ntfy.sh) (gratis app, geen account): opdrachten,
+quizzen, tentamens en je eigen taken met een datum, geen colleges. Lukt Canvas
+niet, dan gaat de laatste momentopname uit; lukt versturen niet, dan probeert hij
+het nog twee keer en eindigt hij met exitcode 1. Installeer de app, abonneer op
+een lange willekeurige topicnaam en zet die als `NTFY_TOPIC` in `.env`: wie de
+naam kent, leest mee.
 
 ```bash
 PYTHONPATH=apps/api python -m app.cli notify --dry-run   # bericht tonen, niets sturen
@@ -168,7 +171,7 @@ het wakker worden.
 ## Tests
 
 ```bash
-pytest                                                     # 1050 tests
+pytest                                                     # 1077 tests
 cd apps/web && npx tsc --noEmit && npx next build
 ```
 
@@ -195,6 +198,7 @@ Zie `.env.example`. De belangrijkste:
 | `DATABASE_URL` | Standaard SQLite in `data/app.db`. |
 | `CANVAS_BASE_URL` | Bijvoorbeeld `https://canvas.uva.nl`. Samen met het token nodig voor de agenda. |
 | `CANVAS_ACCESS_TOKEN` | Je persoonlijke Canvas-token. De app leest alleen; zonder token werkt de agenda op eigen taken en `course.yml`. |
+| `NTFY_TOPIC` | De topicnaam voor deadlines op je telefoon (`notify`). Wie hem kent, leest mee; leeg = geen meldingen. |
 
 ## Opbouw
 

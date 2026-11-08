@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import http.client
 import urllib.error
 from datetime import datetime
 
@@ -89,6 +90,50 @@ def test_a_network_error_has_no_status_and_names_the_cause():
     assert caught.value.status is None
     assert "Connection refused" in str(caught.value)
     assert "geheim-token" not in str(caught.value)
+
+
+@pytest.mark.parametrize(
+    "failure",
+    [TimeoutError("timed out"), http.client.RemoteDisconnected("closed"), http.client.IncompleteRead(b"")],
+    ids=["time-out", "verbroken", "half antwoord"],
+)
+def test_a_connection_that_breaks_after_the_request_is_a_canvas_error(failure):
+    """Alleen `URLError` werd omgezet. Een time-out tijdens het lezen is er geen,
+    en liet de terugval op de laatste momentopname (`cli notify`) omvallen."""
+
+    def broken(request, timeout=None):
+        raise failure
+
+    client = CanvasClient(base_url="https://canvas.test", token="geheim-token", opener=broken)
+
+    with pytest.raises(CanvasError) as caught:
+        client.get("courses")
+
+    assert caught.value.status is None
+    assert "geheim-token" not in str(caught.value)
+    assert caught.value.__suppress_context__ is True
+
+
+def test_a_download_that_breaks_while_reading_is_a_canvas_error():
+    def broken(request, timeout=None):
+        raise TimeoutError("timed out")
+
+    client = CanvasClient(base_url="https://canvas.test", token="geheim-token", opener=broken)
+
+    with pytest.raises(CanvasError) as caught:
+        client.download("https://canvas.test/files/9001/download", max_bytes=10)
+
+    assert caught.value.status is None
+
+
+def test_a_body_that_is_not_json_is_a_canvas_error():
+    """Een inlogpagina of proxy antwoordt 200 met html."""
+    client, _ = _client({"courses": b"<html>log in</html>"})
+
+    with pytest.raises(CanvasError) as caught:
+        client.get("courses")
+
+    assert "geen JSON" in str(caught.value)
 
 
 def test_get_optional_swallows_only_the_tolerated_statuses():
