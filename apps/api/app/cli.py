@@ -6,6 +6,7 @@
     python -m app.cli eval [--api http://localhost:8000] [--compare data/eval/runs/<run>.json]
     python -m app.cli eval-seed
     python -m app.cli canvas-sync [--dry-run]
+    python -m app.cli notify [--days 3] [--dry-run]
 """
 from __future__ import annotations
 
@@ -72,6 +73,10 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Haal deadlines, quizzen, aankondigingen en materiaal uit Canvas (alleen lezen)",
     )
     canvas.add_argument("--dry-run", action="store_true", help="Tel wat er zou komen zonder te schrijven")
+
+    notify = subparsers.add_parser("notify", help="Stuur deadlines van de komende dagen naar je telefoon (ntfy)")
+    notify.add_argument("--days", type=int, default=3, help="Hoeveel dagen vooruit")
+    notify.add_argument("--dry-run", action="store_true", help="Toon het bericht zonder te versturen")
     return parser
 
 
@@ -267,12 +272,45 @@ def _run_canvas_sync(args: argparse.Namespace) -> int:
     return 1 if report.course_problems else 0
 
 
+def _run_notify(args: argparse.Namespace) -> int:
+    from app.services.canvas.agenda import build_agenda
+    from app.services.canvas.notify import due_soon, message, send
+
+    if not settings.ntfy_topic and not args.dry_run:
+        print("ntfy is niet geconfigureerd: zet NTFY_TOPIC in .env")
+        return 1
+    settings.prepare_runtime_directories()
+    init_db()
+    db = SessionLocal()
+    try:
+        client = client_from_settings()
+        if client is not None and not args.dry_run:
+            # Verse deadlines; lukt Canvas niet, dan gaat de laatste momentopname uit.
+            try:
+                sync_canvas(db, client)
+            except CanvasError as exc:
+                print(f"Canvas-fout, oude gegevens gebruikt: {exc}")
+        items = due_soon(build_agenda(db).items, args.days)
+    finally:
+        db.close()
+
+    if not items:
+        print("Niets binnen", args.days, "dagen")
+        return 0
+    print(message(items))
+    if not args.dry_run:
+        send(settings.ntfy_server, settings.ntfy_topic, items)
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     if args.command == "sync":
         return _run_sync(args)
     if args.command == "canvas-sync":
         return _run_canvas_sync(args)
+    if args.command == "notify":
+        return _run_notify(args)
     if args.command == "eval":
         return _run_eval(args)
     if args.command == "exam-import":

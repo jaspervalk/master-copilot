@@ -56,6 +56,10 @@ class Settings(BaseSettings):
     # Ouder dan dit en de agendapagina synchroniseert zelf: er draait geen
     # planner in de app.
     canvas_stale_after_minutes: int = 30
+    # Deadlinemeldingen op je telefoon (`cli notify`). Het topic is het geheim:
+    # wie de naam kent, leest mee. Leeg = geen meldingen.
+    ntfy_server: str = "https://ntfy.sh"
+    ntfy_topic: str | None = None
 
     @property
     def use_sqlite(self) -> bool:

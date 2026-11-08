@@ -149,6 +149,22 @@ zonder zeker voorstel kies je zelf soort en week. Een opdracht zonder pdf (FDS)
 kan als tekst het corpus in, zodat de coach de opgave kent. Canvas past
 `course.yml` nooit aan: waar de deadlines verschillen, zegt de agenda dat.
 
+### Deadlines op je telefoon
+
+`notify` haalt Canvas op en stuurt één bericht met wat er de komende drie
+dagen af moet, via [ntfy](https://ntfy.sh) (gratis app, geen account).
+Installeer de app, abonneer op een lange willekeurige topicnaam en zet die als
+`NTFY_TOPIC` in `.env`: wie de naam kent, leest mee.
+
+```bash
+PYTHONPATH=apps/api python -m app.cli notify --dry-run   # bericht tonen, niets sturen
+PYTHONPATH=apps/api python -m app.cli notify --days 3
+```
+
+Dagelijks draaien op een Mac: een launchd-job met `StartCalendarInterval`
+(08:00) en `WorkingDirectory` op de repo-root; slaapt de Mac, dan draait hij bij
+het wakker worden.
+
 ## Tests
 
 ```bash
